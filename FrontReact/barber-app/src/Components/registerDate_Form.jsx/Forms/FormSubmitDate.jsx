@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 //USO de useform para validacion de los datos mas facil y rapida
 import {useform} from 'react-hook-form';
 
-const FormSubmit =()=>{
+const FormSubmitDate =()=>{
     const [values, setValues] =  useState({
         name: '',
         email: '',
@@ -14,6 +14,15 @@ const FormSubmit =()=>{
         barber: ''
     });
     const [startDate, setStartDate] = useState(new Date());
+    const options ={
+        1:7,
+        2:8,
+        3:9,
+        4:10,
+        5:11,
+        6:12,
+        }
+    
     
 
 
@@ -38,6 +47,8 @@ const handleChange=(evt)=>{
 }
 
 return(
+    <>
+    
     <div className="container">
         <form onSubmit={handleSubmit}
         method='POST'
@@ -80,12 +91,12 @@ return(
             />
              <label htmlFor="time">Hora</label>
              <select id="time" name="time">
-                <Option>1</Option>
-                <Option>1</Option>
-                <Option>1</Option>
-                <Option>1</Option>
-                <Option>1</Option>
-             </select>
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
 
 
         </div>
@@ -93,4 +104,7 @@ return(
         </form>
 
     </div>
+    </>
 )}
+
+export {FormSubmitDate}

@@ -2,6 +2,7 @@ import express from 'express'
 import  {routerDB} from './src/Routes/db.routes.js'
 import {conexMongoDB} from './src/utils/mongoDB.js'
 import { BotTelegram } from './src/utils/telegramBot.js'
+//VAMOS A NECESITAR TRABAJAR CON WEBSOCKET, PARA LA AGENDA DE HORA
 //Necesario para cargar las variables de entorno
 import 'dotenv/config'
 const app = express()
