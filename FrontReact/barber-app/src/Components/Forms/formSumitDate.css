@@ -1,0 +1,91 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+}
+.controls{
+    width: 100%;
+    background: #24303c;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #1f53c5;
+    font-family: 'calibri';
+    font-size: 18px;
+    color: white;
+}
+
+.dateSelect{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(7, 8, 71, 0.691);
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+
+}
+
+.dateSelect label{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.dateSelect select{
+    padding: 5px;
+}
+
+.calendarDate{
+    padding: 5px;
+}
+
+.barberSelect{
+    display: flex;
+    flex-direction: row;
+    font-weight: 500;
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    background-color: rgba(7, 8, 71, 0.691);
+    border: 0px solid #ffffff;
+    line-height: 20px;
+}
+
+button{
+    width: 100%;
+    border: none;
+    background-color: #1f53c5;
+    padding: 12px;
+    color: white;
+    margin: 16px 0;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+
+button {
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, 0.5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+button:hover {
+    cursor: pointer;
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+}
