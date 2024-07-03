@@ -17,7 +17,7 @@ app.listen(PORT, ()=>{
     console.log(`Server Barber is running on port ${PORT}`)
      //Conecto a la BD
     try{
-        conexMongoDB(process.env.URLMONGODB )
+        const db = conexMongoDB(process.env.URLMONGODB )
         BotTelegram()
     }catch(error){
         console.log(error)
