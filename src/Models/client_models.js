@@ -28,5 +28,5 @@ const ClientSchema = new Schema({
     }
 })
 
-const Client = model('Client',ClientSchema)
+const Client = model('client',ClientSchema)
 export {Client}

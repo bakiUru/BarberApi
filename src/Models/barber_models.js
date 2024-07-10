@@ -1,7 +1,7 @@
 import  {Schema,model} from 'mongoose'
 
 
-const barberSchema = new Schema({
+const BarberSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -26,6 +26,6 @@ const barberSchema = new Schema({
 })
 //VALIDACIONES NECESARIAS O EN FRONT
 //creo modelo
-const Barbers = model('Barberos', barberSchema)
+const Barbers = model('barbers', BarberSchema)
 
 export {Barbers}
