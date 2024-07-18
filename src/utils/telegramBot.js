@@ -15,12 +15,11 @@ const reqPost = {
 }
 
 //Inicioo
-const BotTelegram=()=>{
+const BotTelegram= async()=>{
     bot.start((ctx)=>{
         console.log(ctx)
         ctx.reply(`Hola, estoy despertando ${ctx.botInfo.username}`)
     })
-
 //prueba de consulta.BD
     bot.hears('Barberos',async ctx=>{
         let data = await fetch('http://localhost:3028/api/barber')
@@ -36,7 +35,8 @@ const BotTelegram=()=>{
 
     //lanza el BOT
     try {
-        bot.launch()   
+        const newBot= await bot.launch()  
+        console.log(newBot)
     } catch (error) {
         return {message: error}
     }

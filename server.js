@@ -1,7 +1,6 @@
 import express from 'express'
-import path from 'path'
 import  barberRoute from './src/Routes/barber.routes.js'
-import {conexMongoDB} from './src/utils/mongoDB.js'
+import {conexMongoDB} from './src/Config/mongo.config.js'
 import { BotTelegram } from './src/utils/telegramBot.js'
 //VAMOS A NECESITAR TRABAJAR CON WEBSOCKET, PARA LA AGENDA DE HORA
 //Necesario para cargar las variables de entorno
@@ -31,17 +30,25 @@ app.use(express.json())
     .use(express.urlencoded({extended: true}))
     .use('/api',barberRoute)
 
-app.listen(PORT, ()=>{
+app.listen(PORT, async ()=>{
     console.log(`Server Barber is running on port ${PORT}`)
     //Inicio proceso de test
     //askTime()
      //Conecto a la BD
-    try{
-        const db = conexMongoDB(process.env.URLMONGODB )
-        BotTelegram()
-    }catch(error){
-        console.log(error)
-    }
+    const dbPromise =await conexMongoDB(process.env.URLMONGODB)
+        .then(res=>{
+            console.log(res.connection.name)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+        if(!dbPromise)
+        {
+            await BotTelegram()
+            .then(res=>console.log('inicio el Bot',res)
+            ).catch(err=>console.log(err))
+            
+        }else console.log('no se iniciara el bot por desconexion con la bd')
 
 })
 

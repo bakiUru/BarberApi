@@ -1,3 +1,5 @@
+import { MongoServerError } from "mongodb";
+import { DuplicatedRegister } from "../../utils/Errors/error.js";
 import { Barbers } from "../barber_models.js";
 /*
 Definir el dato a pasar como parametro para filtrar el barbero a mod // del // upd
@@ -74,12 +76,18 @@ const delBarber = async (data) =>{
 
 const addBarber = async (data) =>{
     const {name,email,phone,experience,socialMediaHandles} = data
-    console.log(data)
     try{
         //MONGODB
         return await Barbers.create({name,email,phone,experience, socialMediaHandles})
         }catch(e){
-            console.log(e)
+            //error de duplicado
+            if(e.code === 11000)
+            {
+                const regExpresion = `"([^}]*)"`
+                const duplicateKey=e.errorResponse.errmsg.match(regExpresion)[1]
+                throw new DuplicatedRegister('No se permite Duplicar registro--->' + duplicateKey)
+            }
+                throw e
             }
 }
 
