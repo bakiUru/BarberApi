@@ -1,0 +1,1 @@
+export const corsOK = ['http://localhost:3000']

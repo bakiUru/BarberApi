@@ -67,12 +67,29 @@ function FormSubmitDate (){
 
 
 
-const handleSubmit = (evt) =>{
+const handleSubmit = async(evt) =>{
     evt.preventDefault();
     values.date.day = startDate.getDate()
     values.date.month = startDate.getMonth()+1
 
-    console.log(values)
+    const data = {...values}
+    console.log('esto es data',data)
+    try{
+        const response = await fetch('http://localhost:3028/api/',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                console.log(result)
+                if (!response.ok)
+                    throw new Error('No se Pudo enviar el form satisfactoriamente')
+                alert('Formulario en camino!! ')
+    }catch(e){
+        console.log(e.name)
+    }
 
 }
 
@@ -95,10 +112,7 @@ return(
     <>
     
     <div className="container">
-        <form onSubmit={handleSubmit}
-        method='POST'
-        action='/api/'
-        >
+        <form onSubmit={handleSubmit} >
         <div id="inputs">
             <div className="form-group">
 
