@@ -1,6 +1,12 @@
 import React from "react"
 import './barberCard.css'
 
+const handleSelect = (evt)=>{
+    evt.preventDefault()
+    console.log(evt.target.value)
+    alert('Aun no hacen nada... danos time! :)')
+}
+
 function BarberCard({name,city}) {
     console.log(name,city)
     return(
@@ -11,10 +17,10 @@ function BarberCard({name,city}) {
         <h6>{city}</h6>
         <p>User interface designer and <br/> front-end developer</p>
         <div class="buttons">
-            <button class="card-button primary">
+            <button class="card-button primary"  onClick={handleSelect}>
                 Agendar
             </button>
-            <button class="card-button primary ghost">
+            <button class="card-button primary ghost" onClick={handleSelect}>
                 Seguir
             </button>
         </div>
