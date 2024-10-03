@@ -1,6 +1,5 @@
 import  {Schema,model} from 'mongoose'
 
-
 const BarberSchema = new Schema({
     name: {
         type: String,
@@ -15,6 +14,11 @@ const BarberSchema = new Schema({
         type: String,
         require: true,
         unique: true
+    },
+    shift:{
+        type: String,
+        default: complete,
+        enum: ['morning', 'afternoon', 'evening'],
     },
     experience:{
         type: Number,

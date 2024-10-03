@@ -1,6 +1,6 @@
 import { addBarber, getBarber } from '../Models/CRUD/barber.dao.js'
 import { NotValidateDataError } from '../utils/Errors/error.js'
-import {MongoServerError} from 'mongodb'
+import {request, response} from 'express'
 const PHONE_LENGTH = 9
 
 const isValidPhone = (phone)=>{
@@ -26,7 +26,7 @@ const isValidData = (data)=>{
     return data
 }
 
-export const getBarbersController =  async (req,res)=>{
+export const getBarbersController =  async (req=request,res=response)=>{
     try {
         const barbersDB = await getBarber()
         console.log(barbersDB)
@@ -36,7 +36,7 @@ export const getBarbersController =  async (req,res)=>{
         }
 }
 
-export const addBarberController = async (req, res) =>{
+export const addBarberController = async (req=request,res=response) =>{
     try {
         const newBarber = await addBarber(isValidData(req.body))
         res.json(newBarber).status(200)

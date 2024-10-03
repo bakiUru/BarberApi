@@ -1,4 +1,3 @@
-import { MongoServerError } from "mongodb";
 import { DuplicatedRegister } from "../../utils/Errors/error.js";
 import { Barbers } from "../barber_models.js";
 /*
@@ -12,7 +11,7 @@ En este caso utilizo el phone
  * con esto podemos realizar reportes predefinidos 
  *
  */
-const getBarber = async (limit, query, asc) =>{
+const getBarber = async (query,option) =>{
     let filter = query
     if(query!=undefined)
     {
@@ -22,12 +21,20 @@ const getBarber = async (limit, query, asc) =>{
     }
     try{
         //MONGODB
-        return await Barbers.find()
-    }catch(e){
-        console.log(e)
+        return await Barbers.paginate(query,option)
+    }catch(error){
+        console.log(error)
         return null
     }
 
+}
+
+const getBarberByID = async (id) =>{
+    try {
+        return await Barbers.findById(id)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 //funcion de filtrado
@@ -35,8 +42,8 @@ const getBarberByPhone = async (phone) =>{
     try{
         //MONGODB
         return await Barbers.findOne({phone: phone})
-        }catch(e){
-                console.log(e)
+        }catch(error){
+                console.log(error)
                 return null
         }
     
@@ -57,7 +64,7 @@ const updBarber = async (data) =>{
             socialMediaHandles:socialMediaHandles})
 
     }catch(e){
-        console.log(e)
+        console.log(error)
     }
 }
 
@@ -69,7 +76,7 @@ const delBarber = async (data) =>{
         //MONGODB
         return await Barbers.findByIdAndDelete(barber.id)
         }catch(e){
-            console.log(e)
+            console.log(error)
             }
 
 }
@@ -79,20 +86,22 @@ const addBarber = async (data) =>{
     try{
         //MONGODB
         return await Barbers.create({name,email,phone,experience, socialMediaHandles})
-        }catch(e){
+        }catch(error){
             //error de duplicado
-            if(e.code === 11000)
+            if(error.code === 11000)
             {
                 const regExpresion = `"([^}]*)"`
                 const duplicateKey=e.errorResponse.errmsg.match(regExpresion)[1]
                 throw new DuplicatedRegister('No se permite Duplicar registro--->' + duplicateKey)
             }
-                throw e
+                throw error
             }
 }
 
 export {
     getBarber,
+    getBarberByID,
+    getBarberByPhone,
     updBarber,
     delBarber,
     addBarber
